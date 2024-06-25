@@ -12,7 +12,7 @@
 
 ### About the project
 
-TypeScript, React, ChakraUI, Rick&Morty, Vite API are used.
+TypeScript, React, ChakraUI, Rick&Morty API, Vite are used.
 
 ### How to run the project?
 
