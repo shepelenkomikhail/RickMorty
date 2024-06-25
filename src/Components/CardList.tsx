@@ -27,7 +27,7 @@ export default function CardList() {
         } catch (err) {
             setError('Error fetching data');
         } finally {
-            setTimeout(() =>{setLoading(false)}, 1000);
+            setTimeout(() =>{setLoading(false)}, 300);
         }
     };
 
