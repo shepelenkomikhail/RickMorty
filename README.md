@@ -10,9 +10,9 @@
 - Use pagination in the main table (optional).
 - Create an input field on the Home page to search among character names. It should have an `onChange` event, and you should only show rows that contain the searched string (optional)
 
-
 ### About the project
 
+TypeScript, React, ChakraUI, Rick&Morty, Vite API are used.
 
 ### How to run the project?
 
