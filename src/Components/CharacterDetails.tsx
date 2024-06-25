@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import CharacterType from "../Types/CharacterType.ts";
-import {Box, Button, Center, Flex, Heading, Image, Spinner, Text} from "@chakra-ui/react";
+import { Button, Center, Flex, Heading, Image, Spinner, Text} from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "./Header.tsx";
 import Footer from "./Footer.tsx";
@@ -44,8 +44,8 @@ export default function CharacterDetails() {
         <>
             <Header/>
             <Center my={10}>
-                <Box borderWidth={1} p={6} borderRadius={'lg'} boxShadow={'lg'}
-                     align={'center'} justify={'center'} position="relative">
+                <Flex borderWidth={1} p={6} borderRadius={'lg'} boxShadow={'lg'}
+                     alignItems='center' justifyContent='center' position="relative" direction={'column'}>
                     <Flex width="100%" align="center" position='absolute' top={0} left={0} transform={'translate(-8%, -25%)'}>
                         <Button
                             onClick={() => navigate(-1)}
@@ -63,7 +63,7 @@ export default function CharacterDetails() {
                     <Text><b>Location:</b> {character.location.name}</Text>
                     <Text>{character.type !== '' && <b>Type:</b>} {character.type}</Text>
                     <Text><b>Created:</b> {new Date(character.created).toLocaleString()}</Text>
-                </Box>
+                </Flex>
             </Center>
             <Footer/>
         </>

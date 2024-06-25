@@ -8,8 +8,11 @@ export interface ContextType {
     loading: boolean;
     setLoading: Dispatch<SetStateAction<boolean>>;
 }
-export const MyContext = React.createContext<ContextType | undefined>(
-    undefined
+export const MyContext = React.createContext<ContextType>(
+    {
+        loading: true,
+        setLoading: () => {}
+    }
 );
 
 export default function MyProvider({ children }: ProviderProps) {

@@ -1,7 +1,11 @@
-import {Card, CardHeader, CardBody, Image, Heading, Text} from '@chakra-ui/react';
+import {Card, CardHeader, CardBody, Image, Heading, Text, Flex} from '@chakra-ui/react';
 import {useNavigate} from "react-router-dom";
 interface CharacterCardProps {
-    image, name, species, status, id
+    image: string,
+    name: string,
+    species: string,
+    status: string,
+    id: number
 }
 export default function CharacterCard({image, name, species, status, id}: CharacterCardProps) {
     const navigate = useNavigate();
@@ -12,10 +16,12 @@ export default function CharacterCard({image, name, species, status, id}: Charac
             <CardHeader p={0}>
                 <Image src={image} alt={name + 'Image'} rounded={'md'}></Image>
             </CardHeader>
-            <CardBody align={'center'} justify={'center'} pt={4} bg={'gray.50'}>
-                <Heading fontSize={'xl'} mb={2}>{name}</Heading>
-                <Text><b>Species:</b> {species}</Text>
-                <Text><b>Status:</b> {status}</Text>
+            <CardBody pt={4} bg={'gray.50'}>
+                <Flex alignItems={'center'} justifyContent={'center'} direction={'column'}>
+                    <Heading fontSize={'xl'} mb={2}>{name}</Heading>
+                    <Text><b>Species:</b> {species}</Text>
+                    <Text><b>Status:</b> {status}</Text>
+                </Flex>
             </CardBody>
         </Card>
     );

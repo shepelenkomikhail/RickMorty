@@ -10,7 +10,7 @@ export default function App() {
     return (
         <ChakraProvider>
             <MyProvider>
-                <Router>
+                <Router basename={'/RickMorty/'}>
                     <Routes>
                         <Route path="/" element={
                             <>
