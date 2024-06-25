@@ -1,7 +1,6 @@
 import {ChakraProvider} from "@chakra-ui/react";
 import Footer from "./Components/Footer.tsx";
 import Header from "./Components/Header.tsx";
-import Search from "./Components/Search.tsx";
 import CardList from "./Components/CardList.tsx";
 import MyProvider from "./Context/MyProvider.tsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -16,7 +15,6 @@ export default function App() {
                         <Route path="/" element={
                             <>
                                 <Header />
-                                <Search />
                                 <CardList />
                                 <Footer />
                             </>

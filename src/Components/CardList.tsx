@@ -1,12 +1,19 @@
-import { Wrap, Spinner, Center, Button, ButtonGroup } from "@chakra-ui/react";
+import { Wrap, Spinner, Center, Button, ButtonGroup, Input } from "@chakra-ui/react";
 import ResponseType from "../Types/ResponseType.ts";
-import {useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import CharacterType from "../Types/CharacterType.ts";
 import CharacterCard from "./CharacterCard.tsx";
-import {MyContext} from "../Context/MyProvider.tsx";
+import { MyContext } from "../Context/MyProvider.tsx";
+
+function search(query: string, characters: CharacterType[]) {
+    return characters.filter((character: CharacterType) => {
+        return character.name.toLowerCase().includes(query.toLowerCase());
+    });
+}
 
 export default function CardList() {
     const [characters, setCharacters] = useState<CharacterType[]>([]);
+    const [filteredCharacters, setFilteredCharacters] = useState<CharacterType[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const totalPages = 42;
@@ -14,6 +21,16 @@ export default function CardList() {
 
     const context = useContext(MyContext);
     const { loading, setLoading } = context;
+
+    const [query, setQuery] = useState<string>('');
+
+    useEffect(() => {
+        if (query !== '') {
+            setFilteredCharacters(search(query, characters));
+        } else {
+            setFilteredCharacters(characters);
+        }
+    }, [query, characters]);
 
     const fetchData = async (page: number) => {
         setLoading(true);
@@ -24,10 +41,11 @@ export default function CardList() {
             }
             const data: ResponseType = await response.json();
             setCharacters(data.results);
+            setFilteredCharacters(data.results);
         } catch (err) {
             setError('Error fetching data');
         } finally {
-            setTimeout(() =>{setLoading(false)}, 300);
+            setTimeout(() => { setLoading(false) }, 300);
         }
     };
 
@@ -72,8 +90,17 @@ export default function CardList() {
     }
     return (
         <>
+            <Center w={'full'} m={8}>
+                <Input
+                    type="text"
+                    placeholder="Search.."
+                    borderWidth={'1px'}
+                    w={{ base: '80%', sm: '30%' }}
+                    onChange={(e) => { setQuery(e.target.value) }}
+                />
+            </Center>
             <Wrap align={'center'} justify={'center'} mb={4} mx={6} spacing={4}>
-                {characters.map((character: CharacterType) => {
+                {filteredCharacters.map((character: CharacterType) => {
                     return <CharacterCard
                         key={character.id}
                         image={character.image}
