@@ -1,11 +1,14 @@
 import {Card, CardHeader, CardBody, Image, Heading, Text} from '@chakra-ui/react';
+import {useNavigate} from "react-router-dom";
 interface CharacterCardProps {
-    image, name, species, status,
+    image, name, species, status, id
 }
-export default function CharacterCard({image, name, species, status}: CharacterCardProps) {
+export default function CharacterCard({image, name, species, status, id}: CharacterCardProps) {
+    const navigate = useNavigate();
+
     return (
         <Card w={250} _hover={{transform: 'scale(1.01)', cursor: "pointer"}}
-              onClick={()=>{console.log('Click ;-)')}}>
+              onClick={()=>{navigate('/character', {state: {id}})}}>
             <CardHeader p={0}>
                 <Image src={image} alt={name + 'Image'} rounded={'md'}></Image>
             </CardHeader>

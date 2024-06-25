@@ -1,16 +1,19 @@
 import { Wrap, Spinner, Center, Button, ButtonGroup } from "@chakra-ui/react";
 import ResponseType from "../Types/ResponseType.ts";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import CharacterType from "../Types/CharacterType.ts";
 import CharacterCard from "./CharacterCard.tsx";
+import {MyContext} from "../Context/MyProvider.tsx";
 
 export default function CardList() {
     const [characters, setCharacters] = useState<CharacterType[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const totalPages = 42;
     const maxVisibleButtons = 6;
+
+    const context = useContext(MyContext);
+    const { loading, setLoading } = context;
 
     const fetchData = async (page: number) => {
         setLoading(true);
@@ -21,7 +24,6 @@ export default function CardList() {
             }
             const data: ResponseType = await response.json();
             setCharacters(data.results);
-            console.log(data.results);
         } catch (err) {
             setError('Error fetching data');
         } finally {
@@ -78,6 +80,7 @@ export default function CardList() {
                         name={character.name}
                         species={character.species}
                         status={character.status}
+                        id={character.id}
                     />
                 })}
             </Wrap>
